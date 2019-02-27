@@ -104,6 +104,8 @@ alias wrk='workon'
 alias cdp='cdproject'
 alias edit-wrk='mvim $VIRTUAL_ENV/bin/post{,de}activate'
 
+alias open-chrome='open -a /Applications/Google\ Chrome.app'
+
 # Aliases (global)
 alias -g ...='../..'
 alias -g ....='../../..'
