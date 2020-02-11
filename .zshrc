@@ -48,6 +48,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 plugins=(
   broot
   git
+  pyenv
   rust
   virtualenv
   virtualenvwrapper
