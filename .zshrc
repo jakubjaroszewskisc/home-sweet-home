@@ -130,6 +130,9 @@ fi
 
 # Google Cloud SDK
 if [[ -d ~/google-cloud-sdk ]]; then
+    if [[ -x /usr/local/opt/python@3.8/bin/python3 ]]; then
+        export CLOUDSDK_PYTHON=/usr/local/opt/python@3.8/bin/python3
+    fi
     source ~/google-cloud-sdk/path.zsh.inc
     #source ~/google-cloud-sdk/completion.zsh.inc
 fi
