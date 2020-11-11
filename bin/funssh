@@ -65,9 +65,26 @@ if [ -f ~/.ssh/known_hosts ]; then
     awk "${AWK_PARSE_SSH_KNOWN_HOSTS}" ~/.ssh/known_hosts > $FUNSSH_ROOT/ssh_known_hosts
 fi
 
-HOST=$(cat $FUNSSH_ROOT/* | fzf | awk '{print $1}')
-if [ -z $HOST ]; then
+case $(basename "$0") in
+funssh)
+    host=$(cat $FUNSSH_ROOT/* | fzf | awk '{print $1}')
+    ;;
+gunssh)
+    host=$(cat $FUNSSH_ROOT/* | egrep "$1" | awk '{print $1}')
+    if echo $host | grep '\..*\..*\..*\.' > /dev/null; then
+        echo "Too many hosts matched:"
+        cat $FUNSSH_ROOT/* | grep "$1" | awk '{print $2}'
+        exit 1
+    fi
+    shift
+    ;;
+*)
+    echo "WTF?"
+    exit 1
+esac
+
+if [ -z $host ]; then
    exit 1
 fi
 
-$SSH_CMD $HOST $*
+$SSH_CMD $host $*
